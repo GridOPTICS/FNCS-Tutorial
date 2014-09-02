@@ -128,6 +128,9 @@ cd $HOME
 # download FNCS
 git clone https://github.com/GridOPTICS/FNCS
 
+# change to FNCS directory
+cd FNCS
+
 # configure, make, and make install 
 ./configure --prefix=$FNCS_INSTALL --with-zmq=$FNCS_INSTALL
 make
