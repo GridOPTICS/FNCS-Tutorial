@@ -296,6 +296,29 @@ Please note the important message from the installer about how to set
 your LD_LIBRARY_PATH environment variable. See the next section for a
 recreation of the message.
 
+Now you need to download our MATPOWER OPF sources and build the
+executable:
+
+```
+# we are doing everything from your $HOME directory
+cd $HOME
+
+# download FNCS
+git clone https://github.com/GridOPTICS/FNCS-MATPOWER-OPF
+
+# change to the FNCS-MATPOWER-OPF/Sources directory
+cd FNCS-MATPOWER-OPF/Sources
+
+# a custom Makefile is used for this software
+# if the build fails, you may need to edit the top of the file
+# to change the MCR path or FNCS_INSTALL path, as needed
+# or the install path of the software currently being built
+make
+make install
+```
+
+Congratulations, you have now installed our custom MATPOWER OPF binary.
+
 Important Environment Variables
 -------------------------------
 Now that all of the FNCS and related software is installed, now would be
@@ -340,4 +363,26 @@ export XAPPLRESDIR="$FNCS_INSTALL/MATLAB/MATLAB_Compiler_Runtime/v81/X11/app-def
 Running the Co-Simulation
 -------------------------
 The rest of this tutorial assumes that you have installed FNCS and our
-versions of GridLAB-D, ns-3, and MATPOWER.
+versions of GridLAB-D, ns-3, and MATPOWER i.e. all of the software
+mentioned above.
+
+We need to create working directory for our co-simulation. Each
+simulator software package will generate output files, as usual, to the
+current working directory. In addition, we have peppered our versions of
+each simulator software with our own diagnostic output to standard
+output (the terminal). The simulators are designed to locate files from
+the working directory, for example, as inputs. Let us create a working
+directory for the demo.
+
+```
+cd $HOME
+mkdir FNCS-demo-all
+cd FNCS-demo-all
+```
+
+Now we must copy relavent input files to this new working directory. The
+necessary files are found scattered throughout the various software
+packages you have already cloned from the above
+
+
+
