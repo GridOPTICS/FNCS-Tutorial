@@ -1,5 +1,5 @@
 #!/bin/sh
 
 fncsbroker 2 &
-./sim_power > sim_power.out &
-./sim_network > sim_network.out
+./sim_powerA > sim_powerA.out &
+./sim_powerB > sim_powerB.out

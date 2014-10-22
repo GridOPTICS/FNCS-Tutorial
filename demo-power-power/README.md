@@ -189,8 +189,9 @@ through the network simulator. Since this demo does not contain a
 network simulator, we must disable this automatic behavior by explicitly
 setting an attribute of the Message to false.
 
-The [sim_power.json] config file is used by both simulators to indicate
-that these simulators are registered to the broker as power simulators.
+The [sim_power.json](sim_power.json) config file is used by both
+simulators to indicate that these simulators are registered to the
+broker as power simulators.
 
 If you use the run.sh file, the output from each simulator should appear
 in its own file appropriately named. The output is rather uninspiring,
