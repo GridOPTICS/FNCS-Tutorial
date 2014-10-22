@@ -125,7 +125,7 @@ a great time to set some important environment variables. If you have
 been following the steps exactly, then you can copy-and-paste the
 following into a handy shell script that you can source before running
 the co-simulation. If you are reading this file from the github sources,
-you will find the file [here](demo-power-power/FNCS_env.sh).
+you will find the file [here](FNCS_env.sh).
 
 Here is what the file recently looked like, but please refer to the
 original file as linked above.
