@@ -1,0 +1,41 @@
+starting generic simulator
+PowerB: Working. Time is 0
+PowerB: getNextTime current=0 desired=1 granted=1
+PowerB: Working. Time is 1
+PowerB: simObjB received message from simObjA with timestamp 0
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=1 desired=2 granted=2
+PowerB: Working. Time is 2
+PowerB: simObjB received message from simObjA with timestamp 1000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=2 desired=3 granted=3
+PowerB: Working. Time is 3
+PowerB: simObjB received message from simObjA with timestamp 2000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=3 desired=4 granted=4
+PowerB: Working. Time is 4
+PowerB: simObjB received message from simObjA with timestamp 3000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=4 desired=5 granted=5
+PowerB: Working. Time is 5
+PowerB: simObjB received message from simObjA with timestamp 4000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=5 desired=6 granted=6
+PowerB: Working. Time is 6
+PowerB: simObjB received message from simObjA with timestamp 5000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=6 desired=7 granted=7
+PowerB: Working. Time is 7
+PowerB: simObjB received message from simObjA with timestamp 6000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=7 desired=8 granted=8
+PowerB: Working. Time is 8
+PowerB: simObjB received message from simObjA with timestamp 7000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=8 desired=9 granted=9
+PowerB: Working. Time is 9
+PowerB: simObjB received message from simObjA with timestamp 8000000000
+PowerB: sent message from simObjB to simObjA
+PowerB: getNextTime current=9 desired=10 granted=10
+PowerB: DONE!
+finished generic simulator

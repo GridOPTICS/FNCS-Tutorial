@@ -1,8 +1,9 @@
-FNCS-Tutorial
-=============
+FNCS-Tutorial One Power and One Network Simulator
+=================================================
 
 Step-by-step guide for building and running FNCS with two small
-simulator applications.
+simulator applications, one a power simulator and the other a network
+simulator.
 
 Table of Contents
 -----------------
@@ -125,7 +126,7 @@ a great time to set some important environment variables. If you have
 been following the steps exactly, then you can copy-and-paste the
 following into a handy shell script that you can source before running
 the co-simulation. If you are reading this file from the github sources,
-you will find the file [here](demo-small/FNCS_env.sh).
+you will find the file [here](demo-power-network/FNCS_env.sh).
 
 Here is what the file recently looked like, but please refer to the
 original file as linked above.
@@ -163,9 +164,9 @@ inputs.
 
 Feel free to use this current tutorial directory as a working directory
 for the co-simulation run.  In this current tutorial directory you will
-find two source files, [sim_power.cpp](demo-small/sim_power.cpp) and
-[sim_network.cpp](demo-small/sim_network.cpp), as well as a
-[Makefile](demo-small/Makefile) for compiling.  You will also find the
+find two source files, [sim_power.cpp](demo-power-network/sim_power.cpp) and
+[sim_network.cpp](demo-power-network/sim_network.cpp), as well as a
+[Makefile](demo-power-network/Makefile) for compiling.  You will also find the
 necessary JSON files that each simulator needs to pass information to
 the FNCS library during initialization.  There is also a handy script
 file for starting the co-simulation.  All files will be described in
@@ -174,7 +175,7 @@ detail next.
 Assuming you have set up your environment correctly, perhaps having
 sourced the FNCS_env.sh script, you should be able to run "make" without
 issue. This will compile the two source files. To run this simple
-example, the file [run.sh](demo-small/run.sh) has been provided which
+example, the file [run.sh](demo-power-network/run.sh) has been provided which
 will redirect stdout from each simulator to its own file and will also
 launch the "fncsbroker" application which is required to run the
 co-simulation.
