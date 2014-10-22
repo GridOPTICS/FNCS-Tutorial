@@ -163,21 +163,19 @@ inputs.
 
 Feel free to use this current tutorial directory as a working directory
 for the co-simulation run.  In this current tutorial directory you will
-find two source files, [sim_powerA.cpp](demo-power-power/sim_powerA.cpp) and
-[sim_powerB.cpp](demo-power-power/sim_powerB.cpp), as well as a
-[Makefile](demo-power-power/Makefile) for compiling.  You will also find the
-necessary JSON files that each simulator needs to pass information to
-the FNCS library during initialization.  There is also a handy script
-file for starting the co-simulation.  All files will be described in
-detail next.
+find two source files, [sim_powerA.cpp](sim_powerA.cpp) and
+[sim_powerB.cpp](sim_powerB.cpp), as well as a [Makefile](Makefile) for
+compiling.  You will also find the necessary JSON files that each
+simulator needs to pass information to the FNCS library during
+initialization.  There is also a handy script file for starting the
+co-simulation.  All files will be described in detail next.
 
 Assuming you have set up your environment correctly, perhaps having
 sourced the FNCS_env.sh script, you should be able to run "make" without
 issue. This will compile the two source files. To run this simple
-example, the file [run.sh](demo-power-power/run.sh) has been provided which
-will redirect stdout from each simulator to its own file and will also
-launch the "fncsbroker" application which is required to run the
-co-simulation.
+example, the file [run.sh](run.sh) has been provided which will redirect
+stdout from each simulator to its own file and will also launch the
+"fncsbroker" application which is required to run the co-simulation.
 
 Model Description
 -----------------
@@ -191,7 +189,7 @@ through the network simulator. Since this demo does not contain a
 network simulator, we must disable this automatic behavior by explicitly
 setting an attribute of the Message to false.
 
-The "sim_power.json" config file is used by both simulators to indicate
+The [sim_power.json] config file is used by both simulators to indicate
 that these simulators are registered to the broker as power simulators.
 
 If you use the run.sh file, the output from each simulator should appear
