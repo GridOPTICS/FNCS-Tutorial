@@ -231,10 +231,12 @@ correct number of simulators expected (2). The total number of
 simulators connecting to the broker is its only parameter.
 
 Q: What happens when you specify 3 to the fncsbroker instead of 2?
+
 A: The co-sim will hang, as it is expecting another simulator to connect.
 
 Q: What happens when you specify 3 to the fncsbroker and simply execute
 another instance of either sim_powerA or sim_powerB to be the third
 simulator?
+
 A: A registration error will occur. All communicator objects must be
 uniquely named across the entire co-simulation.
