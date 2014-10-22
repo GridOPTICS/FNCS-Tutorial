@@ -191,9 +191,50 @@ setting an attribute of the Message to false.
 
 The [sim_power.json](sim_power.json) config file is used by both
 simulators to indicate that these simulators are registered to the
-broker as power simulators.
+broker as power simulators. Here is what the file recently looked like,
+but please refer to the original file as linked above.
+```
+{
+    "interface" : "ZmqNetworkInterface",
+    "broker" : "localhost",
+    "simulator_type" : "power_grid",
+    "synchronization_algorithm" : "GracePeriodSyncAlgo",
+    "sync_params" : {
+        "number_of_power_grid_sims" : 2
+    },
+    "simulator_time_metric" : "seconds",
+    "packet_lost_period" : 2300000000
+}
+```
+One important bit to glean from this file is the location where the
+"broker" will be running. In our case its running locally, but you could
+start the broker on another server so long as you tell the simulators
+where it is located. Another important parameter is the
+"simulator_time_metric" which tells the broker which unit of time the
+simulator uses. This becomes important as you add simulators with
+different units of time. Also note that we are declaring this
+"simulator_type" as "power_grid" -- we have either "power_grid" or
+"communication_network" simulator types. The "packet_lost_period" is
+only relevant when you have a network simulator as part of the co-sim.
+The other parameters were customizable at one point in time but are now
+mostly vestiges of this being research code and should be copied
+verbatim, e.g., "interface", "sync_params", "number_of_power_grid_sims".
+The "synchronization_algorithm" will be talked about in the large demo
+later on.
 
-If you use the run.sh file, the output from each simulator should appear
-in its own file appropriately named. The output is rather uninspiring,
-but you should at least notice that messages weren't received out of
-order.
+If you execute the [run.sh](run.sh) file, the output from each simulator
+should appear in its own file appropriately named. The output is rather
+uninspiring, but you should at least notice that messages weren't
+received out of order. The [run.sh](run.sh) file isn't anything special,
+but it does at least execute the "fncsbroker" application with the
+correct number of simulators expected (2). The total number of
+simulators connecting to the broker is its only parameter.
+
+Q: What happens when you specify 3 to the fncsbroker instead of 2?
+A: The co-sim will hang, as it is expecting another simulator to connect.
+
+Q: What happens when you specify 3 to the fncsbroker and simply execute
+another instance of either sim_powerA or sim_powerB to be the third
+simulator?
+A: A registration error will occur. All communicator objects must be
+uniquely named across the entire co-simulation.
