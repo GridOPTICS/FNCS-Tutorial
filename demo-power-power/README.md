@@ -193,7 +193,7 @@ The [sim_power.json](sim_power.json) config file is used by both
 simulators to indicate that these simulators are registered to the
 broker as power simulators. Here is what the file recently looked like,
 but please refer to the original file as linked above.
-```
+```json
 {
     "interface" : "ZmqNetworkInterface",
     "broker" : "localhost",
