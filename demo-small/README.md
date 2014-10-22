@@ -125,7 +125,7 @@ a great time to set some important environment variables. If you have
 been following the steps exactly, then you can copy-and-paste the
 following into a handy shell script that you can source before running
 the co-simulation. If you are reading this file from the github sources,
-you will find the file [here](FNCS_env.sh).
+you will find the file [here](demo-small/FNCS_env.sh).
 
 Here is what the file recently looked like, but please refer to the
 original file as linked above.
@@ -154,17 +154,48 @@ fi
 
 Running the Co-Simulation
 -------------------------
-We need to create working directory for our co-simulation. Each
+We need to create a working directory for our co-simulation. Each
 simulator software package will generate output files, as usual, to the
-current working directory. In addition, we have peppered our versions of
-each simulator software with our own diagnostic output to standard
-output (the terminal). The simulators are designed to locate files from
-the working directory, for example, as inputs. 
+current working directory. In addition, each example simulator has
+diagnostic output to standard output (the terminal). The simulators are
+designed to locate files from the working directory, for example, as
+inputs. 
 
 Feel free to use this current tutorial directory as a working directory
 for the co-simulation run.  In this current tutorial directory you will
-find two source files and a Makefile for compiling.  You will also find
-the necessary JSON files that each simulator needs to pass information
-to the FNCS library during initialization.  There is also a handy script
+find two source files, [sim_power.cpp](demo-small/sim_power.cpp) and
+[sim_network.cpp](demo-small/sim_network.cpp), as well as a
+[Makefile](demo-small/Makefile) for compiling.  You will also find the
+necessary JSON files that each simulator needs to pass information to
+the FNCS library during initialization.  There is also a handy script
 file for starting the co-simulation.  All files will be described in
 detail next.
+
+Assuming you have set up your environment correctly, perhaps having
+sourced the FNCS_env.sh script, you should be able to run "make" without
+issue. This will compile the two source files. To run this simple
+example, the file [run.sh](demo-small/run.sh) has been provided which
+will redirect stdout from each simulator to its own file and will also
+launch the "fncsbroker" application which is required to run the
+co-simulation.
+
+Model Description
+-----------------
+We have set up the co-sim to use a single "power" simulator and a single
+"network" simulator. The power simulator contains two objects that wish
+to send messages, "simObj1" and "simObj2". Those two objects are
+shadowed by objects in the network simulator. In this demo, simObj1
+sends to simObj2 only. When simObj1 sends a message to simObj2, it is
+automatically sent from the power simulator to the network simulator
+because by default FNCS assumes you want messages routed through a
+network simulator. The "sim_network.json" config file indicates that the
+network simulator is indeed registered to the FNCS broker as a network
+simulator -- currently FNCS can support only one network simulator. Once
+the network sim has scheduled the message to be delivered, it is sent on
+to its original destination of simObj2 running within the power sim.
+
+This demo shows two different types of simulators, tick-based simulators
+and event-based simulators. The code is similar, but when checking for
+incoming messages it is sometimes convenient to use the callback
+capability for event-based sims instead of polling for new messages as
+in the tick-based sim.
