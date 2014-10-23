@@ -1,8 +1,11 @@
 FNCS-Tutorial
 =============
 Welcome to the Framework for Network Co-Simulation (FNCS) Tutorial.
-This tutorial features three step-by-step guides that target the basics
-('power+power', 'power+network') and a fully-featured use case ('large').
+This tutorial features four step-by-step guides that target the basics
+('power+power', 'power+network'), a modestly complex transactive control
+application ('GridLAB-D+ns-3'), and a fully-featured transactive control
+application with multiple feeders, retail markets, and a wholesale
+market inside a transmission-level optimal power flow ('large').
 
 The [power+power demo](demo-power-power) showcases the
 fundamentals of running co-simulations using the FNCS framework. We will
@@ -18,6 +21,14 @@ The [power+network demo](demo-power-network) increases the complexity of
 co-simulation by combining a power simulator with a network simulator.
 Combining tick-based simulators with event-based simulators can be
 frustrating, but we provide interfaces for each type of simulator.
+
+The [GridLAB-D+ns-3 demo](demo-gld-ns3) will walk you through installing
+FNCS, GridLAB-D, ns-3, and all prerequisite software. This complex
+example application demonstrates a real use case of transactive control,
+exchanging market prices and bids through a simulated network. A single
+GridLAB-D instance simulates a single feeder and market, where the bids
+and price signals are routed through the communication network modeled
+by ns-3.
 
 The [large demo](demo-large) will walk you through installing FNCS,
 GridLAB-D, ns-3, MATPOWER, and all prerequisite software. This complex
