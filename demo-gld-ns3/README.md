@@ -287,13 +287,86 @@ fi
 ## Model Description
 [back to contents](#table-of-contents)
 
-TODO
+In this current directory you will find many files, the vast majority of
+them are input files for GridLAB-D.
+
+- Tutorial files
+    - FNCS_env.sh -- source this file to set up your environment variables
+    - README.md -- this file
+- GridLAB-D files
+    - appliance_schedules.glm
+    - ColumbusWeather2009_2a.csv
+    - fncs_GLD_300node_Feeder_1.glm
+    - LinkModelGLDNS3.txt
+    - phase_A.player
+    - phase_B.player
+    - phase_C.player
+    - tzinfo.txt
+    - unitfile.txt
+    - water_and_setpoint_schedule_v3.glm
+    - configgld.json -- FNCS config file for ns-3
+- ns-3 files
+    - compile-ns3.sh -- our helper script for compiling ns-3 model
+    - firstN.cc -- the ns-3 model source file
+    - configns3.json -- FNCS config file for ns-3
+
+### GridLAB-D Model
+Our GridLAB-D model consists of 300 houses. Some of the houses
+participate in a transactive market where they send their
+(price,quantity) bids to an auction house. The bids are collected,
+sorted, and from them a price signal is broadcast back out to the
+participating homes. The bids as well as the price signal are
+communicated through the ns-3 model to realistically delay the messages.
+
+To get GridLAB-D to work with FNCS, we needed to modify how it processes
+time. For details, see the core/exec.c and core/main.c files in our
+custom distribution of GridLAB-D. In order for houses to communicate
+with the auction, we created a new GridLAB-D module called "comm", the
+source code for which can be found in the communications directory can
+in our custom GridLAB-D distribution. Within the comm module we created
+the "market network interface" as well as the "controller network
+interface" classes which create, send, and receive FNCS Messages between
+them.
+
+Figuring out how to control time within GridLAB-D was challenging,
+however the exchange of messages between entities within GridLAB-D is
+really no more complicated than our first simple "power+power" demo in
+these tutorial pages.
+
+### ns-3 Model
+Our ns-3 model [firstN.cc](firstN.cc) creates 300 nodes within the
+network in groups of 20. We use the CSMA model of ns-3 in order to set a
+"DataRate" as well as a "Delay". ns-3 is its own feature-rich network
+modeling simulator, so our simple model should not be considered the
+only solution. We give each node an IP address and later map the IP
+addresses to names given to each house from the GridLAB-D model. The
+GridLAB-D house names follow a regular pattern which we exploit when
+naming the nodes in our ns-3 network -- we only need to know the number
+of houses in the GridLAB-D model and the name prefix for the houses. The
+single input file [LinkModelGLDNS3.txt](LinkModelGLDNS3.txt) provides
+this information to our ns-3 model.
+
+To get ns-3 to work with FNCS, we created a new ns-3 FNCS "application".
+Applications are associated with individual nodes. Each node holds a
+list of references to its applications. In other words, a node in ns-3
+on its own doesn't do anything, rather it must have one or more
+applications running on the node. Our FNCS application listens for FNCS
+messages. Upon receiving a FNCS message, a FNCS application running at a
+node injects the message into the simulated network at its node. The
+ns-3 model routes the message appropriately, realistically delaying its
+transmission, and then the FNCS application instance running on the
+destination node in the network reads the message once it arrives and
+sends it back to the FNCS broker so it can be sent back to the
+destination simulator.
+
+It may sound complicated, but it's really not so different from our
+simple network simulator from the second tutorial.
 
 ## Running the Co-Simulation
 [back to contents](#table-of-contents)
 
-The rest of this tutorial assumes that you have installed FNCS and our versions
-of GridLAB-D and ns-3 i.e. all of the software mentioned above.
+The rest of this tutorial assumes that you have installed FNCS and our
+versions of GridLAB-D and ns-3 i.e. all of the software mentioned above.
 
 We will use the current directory of the tutorial as the working
 directory for our co-simulation.  Each simulator software package will
@@ -302,11 +375,41 @@ addition, we have may have added own diagnostic output to standard
 output (the terminal). The simulators are designed to locate files from
 the working directory, for example, as inputs.
 
-The current directory should contain all needed files for this
-co-simulation demo.
+We don't have a handy script for you this time around to run the demo.
+Instead, open up three terminal windows, one for running the fncsbroker,
+one for GridLAB-D, and the last for ns-3.
 
-- firstN.cc, the ns-3 model
-- compile-ns3.sh, a helper script for compiling firstN.cc
-- FIXME.glm, GridLAB-D model file
+If you have sourced the FNCS_env.sh file and installed the softare as we
+had indiated, you should be ready to compile the ns-3 model and run the
+demo. Start by compiling the ns-3 model.
 
+```bash
+./compile-ns.sh firstN.cc
+```
 
+In the first window, from this tutorial directory, run GridLAB-D.
+
+```bash
+gridlabd ./fncs_GLD_300node_Feeder_1.glm
+```
+
+In the second window, from this tutorial directory, run ns-3.
+
+```bash
+./firstN
+```
+
+In the third window, from this tutorial directory, run fncsbroker.
+```bash
+fncsbroker 2
+```
+
+You should start seeing, in addition to the usual output from GridLAB-D,
+our diagnostic messages coming from each simulator (note that fncsbroker
+is silent).
+
+What you do with the output from this co-simulation is really up to you,
+the modeler. You could experiment by setting longer delays to our ns-3
+model, or better yet create your own ns-3 model that is more
+complicated or uses a different network protocol. You could use a
+GridLAB-D model that has more houses or has greater market penetration.
