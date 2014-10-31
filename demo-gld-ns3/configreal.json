@@ -1,0 +1,10 @@
+{ "interface": "ZmqNetworkInterface",
+  "broker": "localhost",
+  "simulator_type" : "real",
+  "synchronization_algorithm" : "GracePeriodSyncAlgo",
+  "sync_params" : {
+  	"number_of_power_grid_sims" : 2
+  },
+  "simulator_time_metric" : "seconds",
+  "packet_lost_period" : 2300000000
+}

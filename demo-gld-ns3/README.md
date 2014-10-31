@@ -15,8 +15,8 @@ delaying and routing messages through ns-3.
   - [GridLAB-D Installation](#gridlab-d-installation)
   - [ns-3 Installation](#ns-3-installation)
 - [Important Environment Variables](#important-environment-variables)
-- [Running the Co-Simulation](#running-the-co-simulation)
 - [Model Description](#model-description)
+- [Running the Co-Simulation](#running-the-co-simulation)
 
 
 ## Hardware Requirements
@@ -283,6 +283,11 @@ else
     export PATH="$FNCS_INSTALL/bin:$PATH"
 fi
 ```
+
+## Model Description
+[back to contents](#table-of-contents)
+
+TODO
 
 ## Running the Co-Simulation
 [back to contents](#table-of-contents)

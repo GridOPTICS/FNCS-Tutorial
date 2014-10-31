@@ -1,0 +1,7 @@
+{ "interface": "ZmqNetworkInterface",
+  "broker": "localhost",
+  "simulator_type" : "communication_network",
+  "synchronization_algorithm" : "CommunicatorSimulatorSyncalgo",
+  "simulator_time_metric" : "nanoseconds",
+  "packet_lost_period" : 51000000000
+}

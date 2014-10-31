@@ -190,7 +190,7 @@ main (int argc, char *argv[])
 
     //mark market nodes for fncs app installation.
     gldnodes.Add(markCon);
-    gldnodes.Add(csma[0].Get(21));
+    //gldnodes.Add(csma[0].Get(21));
 
     {
         //add the CMSA nodes
