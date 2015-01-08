@@ -18,7 +18,6 @@ delaying and routing messages through ns-3.
 - [Model Description](#model-description)
 - [Running the Co-Simulation](#running-the-co-simulation)
 
-
 ## Hardware Requirements
 [back to contents](#table-of-contents)
 
@@ -250,8 +249,9 @@ CFLAGS="-g -O2" CXXFLAGS="-g -O2" ./waf configure --prefix=$FNCS_INSTALL --with-
 Congratulations, you have now installed ns-3, at least, our version
 of it.
 
-Important Environment Variables
--------------------------------
+## Important Environment Variables
+[back to contents](#table-of-contents)
+
 Now that all of the FNCS and related software is installed, now would be
 a great time to set some important environment variables. If you have
 been following the steps exactly, then you can copy-and-paste the
@@ -375,38 +375,60 @@ addition, we have may have added own diagnostic output to standard
 output (the terminal). The simulators are designed to locate files from
 the working directory, for example, as inputs.
 
-We don't have a handy script for you this time around to run the demo.
-Instead, open up three terminal windows, one for running the fncsbroker,
-one for GridLAB-D, and the last for ns-3.
-
 If you have sourced the FNCS_env.sh file and installed the softare as we
-had indiated, you should be ready to compile the ns-3 model and run the
+had indicated, you should be ready to compile the ns-3 model and run the
 demo. Start by compiling the ns-3 model.
 
 ```bash
 ./compile-ns.sh firstN.cc
 ```
 
-In the first window, from this tutorial directory, run GridLAB-D.
+If we didn't already have a handy script for you this time around to run
+the demo, instead you would need to manually open up three terminal
+windows, one for running the fncsbroker, one for GridLAB-D, and the last
+for ns-3. If you're wanting to run the demo that way, do the following
+steps.
+
+In the first window, from this tutorial directory, run GridLAB-D and
+specify the demo GLM model file.
 
 ```bash
 gridlabd ./fncs_GLD_300node_Feeder_1.glm
 ```
 
-In the second window, from this tutorial directory, run ns-3.
+In the second window, from this tutorial directory, run the compiled
+ns-3 model and specify its model file.
 
 ```bash
 ./firstN LinkModelGLDNS3.txt
 ```
 
-In the third window, from this tutorial directory, run fncsbroker.
+In the third window, from this tutorial directory, run fncsbroker. The
+command-line argument '2' indicates that two simulators will be
+connecting to the broker.
 ```bash
 fncsbroker 2
 ```
 
-You should start seeing, in addition to the usual output from GridLAB-D,
-our diagnostic messages coming from each simulator (note that fncsbroker
-is silent).
+As mentioned above, we have a useful script for running all of the
+simulators and the broker in separate windows. This assumes you have
+followed the installation process exactly as documented. No need to
+source the FNCS_env.sh file because it is embedded into the run.sh
+script. The run.sh script will set up your environment for you and then
+run 'xterm' once for each of the simulators and the broker. xterm
+instances should start appearing on your desktop. If you only see a
+subset of the xterm windows, chances are they are overlapping so you
+will need to drag them around your desktop to reveal hidden ones.
+
+In either the terminals you manually created or in the ones created for
+you by the run.sh script, you should start seeing (in addition to the
+usual output from any of the simulators like GridLAB-D) our diagnostic
+messages coming from each simulator (note that fncsbroker is silent).
+
+Once one of the simulators reaches the end of their simulated time, or
+if you manually terminate any of them using Ctrl+C, all of the
+simulators should stop. If you have used the run.sh script, this should
+also automatically close the xterm sessions.
 
 What you do with the output from this co-simulation is really up to you,
 the modeler. You could experiment by setting longer delays to our ns-3
