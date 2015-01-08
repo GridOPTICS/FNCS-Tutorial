@@ -21,6 +21,7 @@ ns-3.
 - [Model Description](#model-description)
   - [GridLAB-D Models](#gridlab-d-models)
   - [ns-3 Model](#ns-3-model)
+  - [MATPOWER-OPF Model](#matpower-opf-model)
 - [Running the Co-Simulation](#running-the-co-simulation)
 
 ## Hardware Requirements
