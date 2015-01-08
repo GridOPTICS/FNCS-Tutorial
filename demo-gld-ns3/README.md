@@ -396,7 +396,7 @@ gridlabd ./fncs_GLD_300node_Feeder_1.glm
 In the second window, from this tutorial directory, run ns-3.
 
 ```bash
-./firstN
+./firstN LinkModelGLDNS3.txt
 ```
 
 In the third window, from this tutorial directory, run fncsbroker.
