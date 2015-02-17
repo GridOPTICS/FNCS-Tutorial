@@ -502,7 +502,7 @@ had indicated, you should be ready to compile the ns-3 model and run the
 demo. Start by compiling the ns-3 model.
 
 ```bash
-./compile-ns.sh firstN.cc
+./compile-ns3.sh firstN.cc
 ```
 
 If we didn't already have a handy script for you this time around to run
