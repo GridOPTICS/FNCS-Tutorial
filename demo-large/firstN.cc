@@ -134,15 +134,18 @@ main (int argc, char *argv[])
     ihelper.SetRoutingHelper (list);
 
     /*Create CMSA nodes*/
-    NodeContainer csma[createNodes],markCon;
+    NodeContainer csma[createNodes],markCon,psellobj;
 
-    for(int i=0;i<createNodes;i++){
+    csma[0].Create(22);
+    for(int i=1;i<createNodes;i++){
         csma[i].Create(21);
     }
     //create market
     markCon.Create(networks.size());
+    psellobj.Create(1);
 
     ihelper.Install(markCon);
+    ihelper.Install(psellobj);
     CsmaHelper chelper;
 
     chelper.SetChannelAttribute ("DataRate", DataRateValue (10000000));
@@ -190,7 +193,7 @@ main (int argc, char *argv[])
 
     //mark market nodes for fncs app installation.
     gldnodes.Add(markCon);
-    //gldnodes.Add(csma[0].Get(21));
+    gldnodes.Add(csma[0].Get(21));
 
     {
         //add the CMSA nodes
@@ -207,7 +210,7 @@ main (int argc, char *argv[])
     }
 
     /* Set up a vector containing names of all objects on the network */
-    /* The lits includes market names and all controller names */
+    /* The lits includes market names, psellobj, and all controller names */
     vector<string> names;
 
     stringstream ss;
@@ -216,6 +219,9 @@ main (int argc, char *argv[])
     for(int i=0;i<networks.size();i++){
         names.push_back(networks[i]->marketname);
     }
+
+    //add psells
+    names.push_back(string("psellobj"));
 
     //add houses
     for(int i=0;i<networks.size();i++){
